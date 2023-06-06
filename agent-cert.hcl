@@ -29,7 +29,7 @@ env_template "CERT_KEY" {
 }
 
 exec {
-  command                   = ["./demo-app3.sh"]
+  command                   = ["./demo-app2.sh"]
   restart_on_secret_changes = "always"
   restart_stop_signal       = "SIGTERM"
 }
