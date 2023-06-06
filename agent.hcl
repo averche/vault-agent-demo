@@ -19,17 +19,17 @@ vault {
   address = "http://localhost:8200"
 }
 
-env_template "CERT" {
-  contents             = "{{ with pkiCert \"pki/issue/example-dot-com\" \"common_name=foo.example.com\" }}{{ .Data.Cert }}{{ end }}"
+env_template "TEST_PASSWORD" {
+  contents             = "{{ with secret \"secret/data/test\" }}{{ .Data.data.password }}{{ end }}"
   error_on_missing_key = true
 }
-env_template "CERT_KEY" {
-  contents             = "{{ with pkiCert \"pki/issue/example-dot-com\" \"common_name=foo.example.com\" }}{{ .Data.Key }}{{ end }}"
+env_template "TEST_USER" {
+  contents             = "{{ with secret \"secret/data/test\" }}{{ .Data.data.user }}{{ end }}"
   error_on_missing_key = true
 }
 
 exec {
-  command                   = ["./demo-app3.sh"]
+  command                   = ["./demo-app1.sh"]
   restart_on_secret_changes = "always"
   restart_stop_signal       = "SIGTERM"
 }
