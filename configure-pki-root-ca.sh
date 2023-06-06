@@ -14,8 +14,9 @@ vault write pki/config/urls \
 	issuing_certificates="http://vault.example.com:8200/v1/pki/ca" \
 	crl_distribution_points="http://vault.example.com:8200/v1/pki/crl"
 
-# configure role
+# configure a role with no_store=true (since we re-issue certificates on restart)
 vault write pki/roles/example-dot-com \
-	allowed_domains=example.com \
+	allowed_domains="example.com" \
 	allow_subdomains=true \
-	max_ttl=20s
+	no_store=true \
+	max_ttl=20s # artificially low for a demo
