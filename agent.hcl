@@ -27,6 +27,26 @@ env_template "TEST_USER" {
   contents             = "{{ with secret \"secret/data/test\" }}{{ .Data.data.user }}{{ end }}"
   error_on_missing_key = true
 }
+env_template "API_KEYS_KEY1" {
+  contents             = "{{ with secret \"secret/data/my-app/api-keys\" }}{{ .Data.data.key1 }}{{ end }}"
+  error_on_missing_key = true
+}
+env_template "API_KEYS_KEY2" {
+  contents             = "{{ with secret \"secret/data/my-app/api-keys\" }}{{ .Data.data.key2 }}{{ end }}"
+  error_on_missing_key = true
+}
+env_template "DATABASE_PASSWORD" {
+  contents             = "{{ with secret \"secret/data/my-app/database\" }}{{ .Data.data.password }}{{ end }}"
+  error_on_missing_key = true
+}
+env_template "DATABASE_USER" {
+  contents             = "{{ with secret \"secret/data/my-app/database\" }}{{ .Data.data.user }}{{ end }}"
+  error_on_missing_key = true
+}
+env_template "NESTED_VALUE" {
+  contents             = "{{ with secret \"secret/data/my-app/foo/bar/nested\" }}{{ .Data.data.value }}{{ end }}"
+  error_on_missing_key = true
+}
 
 exec {
   command                   = ["./demo-app1.sh"]
